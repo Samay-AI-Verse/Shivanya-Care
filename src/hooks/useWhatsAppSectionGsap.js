@@ -66,7 +66,7 @@ export function useWhatsAppSectionGsap(showContent) {
         ScrollTrigger.create({
             trigger: "#whatsapp-section",
             start: "top top",
-            end: "+=100%", // Keep it pinned for 1 viewport height of scroll
+            end: "+=50%", // Keep it pinned for only half a viewport height of scroll
             pin: true,
         });
 
