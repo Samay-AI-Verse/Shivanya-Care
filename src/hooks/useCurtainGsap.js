@@ -41,8 +41,7 @@ export function useCurtainGsap(showContent) {
         });
 
         // ── NAVBAR COLOR TOGGLE ───────────────────────────────────────────────
-        // Toggles navbar from light (#f4ede6) on the hero/dark sections
-        // to dark (#2d3d1a) when scrolling over the light features grid.
+        // Dark sections: light cream (#EAE5D9) like Shivanya logo. Light sections: dark olive (#5C683B) like MENU.
         ScrollTrigger.create({
             trigger: ".animation-block",
             start: "top top",
@@ -51,7 +50,7 @@ export function useCurtainGsap(showContent) {
                 // Change point matches the timing when the white grid is fully visible
                 const isLightSection = self.progress > 0.45 && self.progress < 1.0;
                 gsap.to("body", {
-                    "--nav-color": isLightSection ? "#2d3d1a" : "#f4ede6",
+                    "--nav-color": isLightSection ? "#5C683B" : "#EAE5D9",
                     duration: 0.3,
                     ease: "power2.out",
                     overwrite: "auto"

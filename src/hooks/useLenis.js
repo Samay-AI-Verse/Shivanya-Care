@@ -21,7 +21,16 @@ export function useLenis(showContent) {
             touchMultiplier: 1.2,
         });
 
-        // Keep GSAP ScrollTrigger perfectly in sync with Lenis scroll position
+        // Sync ScrollTrigger with Lenis scroll position (scrollerProxy for accurate scrub)
+        ScrollTrigger.scrollerProxy(document.body, {
+            scrollTop(value) {
+                if (arguments.length) lenis.scrollTo(value);
+                return lenis.scroll;
+            },
+            getBoundingClientRect() {
+                return { top: 0, left: 0, right: window.innerWidth, bottom: window.innerHeight, width: window.innerWidth, height: window.innerHeight };
+            },
+        });
         lenis.on("scroll", ScrollTrigger.update);
 
         function raf(time) {

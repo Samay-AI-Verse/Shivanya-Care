@@ -3,7 +3,7 @@
  * Pharmacist command dashboard — KPI cards, inventory, analytics.
  */
 
-import backgroundImage from "../../assets/image/background image.png";
+import backgroundImage from "../../assets/image/imagebackgrouns.png";
 
 const KPIS = [
     { icon: "ri-shopping-bag-3-line", label: "Orders Today", value: "284", delta: "+12%", color: "#b7c25e" },
@@ -41,9 +41,11 @@ const QUICK_STATS = [
 export default function DashboardSection() {
     return (
         <section id="dashboard-section" style={{
-            /* Allowed it to take natural height instead of restricting to 100vh */
-            background: `linear-gradient(180deg, rgba(45,61,26,0.6) 0%, rgba(18,30,7,0.97) 100%), url(${backgroundImage}) center/cover`,
-            backgroundAttachment: "fixed",
+            /* Full image at natural size, no crop, scrolls to see all like reference site */
+            background: `linear-gradient(180deg, rgba(30,45,15,0.2) 0%, rgba(15,25,8,0.45) 100%), url(${backgroundImage}) center top no-repeat`,
+            backgroundAttachment: "scroll",
+            backgroundSize: "100% auto",
+            minHeight: "100vh",
             /* Added padding bottom (10vh) so you can scroll past the full box */
             padding: "15vh 6vw 10vh",
             display: "flex",

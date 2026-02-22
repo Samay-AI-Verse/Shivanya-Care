@@ -11,7 +11,7 @@ export default function Navbar({ onMenuClick }) {
         >
             <style>{`
                 :root {
-                    --nav-color: #ffffff;
+                    --nav-color: #EAE5D9;
                 }
                 .nav-link {
                     position: relative;
