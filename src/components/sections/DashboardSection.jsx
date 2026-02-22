@@ -3,6 +3,8 @@
  * Pharmacist command dashboard — KPI cards, inventory, analytics.
  */
 
+import backgroundImage from "../../assets/image/background image.png";
+
 const KPIS = [
     { icon: "ri-shopping-bag-3-line", label: "Orders Today", value: "284", delta: "+12%", color: "#b7c25e" },
     { icon: "ri-money-rupee-circle-line", label: "Revenue", value: "₹1.2L", delta: "+8%", color: "#7dcf50" },
@@ -40,14 +42,14 @@ export default function DashboardSection() {
     return (
         <section id="dashboard-section" style={{
             /* Allowed it to take natural height instead of restricting to 100vh */
-            background: `linear-gradient(180deg, rgba(45,61,26,0.6) 0%, rgba(18,30,7,0.97) 100%), url('/background-image.png') center/cover`,
+            background: `linear-gradient(180deg, rgba(45,61,26,0.6) 0%, rgba(18,30,7,0.97) 100%), url(${backgroundImage}) center/cover`,
             backgroundAttachment: "fixed",
             /* Added padding bottom (10vh) so you can scroll past the full box */
             padding: "15vh 6vw 10vh",
             display: "flex",
             flexDirection: "column",
-            /* INCREASED GAP HERE (was 32px, now 64px) to push the dashboard further down from the text */
-            gap: "64px",
+            /* INCREASED GAP HERE to add more space between header text and dashboard */
+            gap: "150px",
         }}>
 
             {/* ── Header ── */}
@@ -63,7 +65,7 @@ export default function DashboardSection() {
             </div>
 
             {/* ── Channel Quick Stats ── */}
-            <div className="dash-anim" style={{ display: "flex", gap: "14px", flexWrap: "wrap", marginTop: "-20px" }}>
+            <div className="dash-anim" style={{ display: "flex", gap: "14px", flexWrap: "wrap", marginTop: "-120px" }}>
                 {QUICK_STATS.map(s => (
                     <div key={s.label} style={{
                         display: "flex", alignItems: "center", gap: "10px",
