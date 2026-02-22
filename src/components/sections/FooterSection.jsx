@@ -6,6 +6,7 @@
  *  • Large SVG logo centered at bottom
  *  • Copyright + LinkedIn bottom bar
  */
+import FooterHoverGrid from "../effects/FooterHoverGrid";
 
 const NAV_COLS = [
     {
@@ -14,11 +15,11 @@ const NAV_COLS = [
     },
     {
         heading: "Platform",
-        links: ["Pharmacist Dashboard", "Delivery Module", "Multi-User Access", "Analytics", "Inventory"],
+        links: ["Pharmacist Dashboard", "Delivery Module", "Analytics", "Inventory"],
     },
     {
         heading: "Company",
-        links: ["About Us", "How It Works", "Careers", "Press", "Contact"],
+        links: ["About Us", "Contact"],
     },
 ];
 
@@ -41,11 +42,17 @@ const TEXT = {
 
 export default function FooterSection() {
     return (
-        <section style={{
+        <section id="footer-section" style={{
             background: "#ede9df",
             position: "relative",
             overflow: "hidden",
+            height: "100vh",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between"
         }}>
+
+            <FooterHoverGrid />
 
             {/* ── Top bar: thin line ── */}
             <div style={{ borderTop: "1px solid rgba(45,61,26,0.15)" }} />
@@ -55,7 +62,7 @@ export default function FooterSection() {
 
                 {/* Nav columns */}
                 {NAV_COLS.map(col => (
-                    <div key={col.heading} className="footer-anim">
+                    <div key={col.heading} className="footer-anim" style={{ position: "relative", zIndex: 10 }}>
                         <p style={{ ...TEXT, fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", margin: "0 0 18px", opacity: 0.5 }}>{col.heading}</p>
                         {col.links.map(link => (
                             <a key={link} href="#" style={{
@@ -71,7 +78,7 @@ export default function FooterSection() {
                 ))}
 
                 {/* Right: Contact */}
-                <div className="footer-anim" style={{ textAlign: "right" }}>
+                <div className="footer-anim" style={{ textAlign: "right", position: "relative", zIndex: 10 }}>
                     <p style={{ ...TEXT, fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", opacity: 0.5, margin: "0 0 12px", lineHeight: 1.6 }}>
                         IF YOU HAVE ANY QUESTIONS<br />FEEL FREE TO CONTACT US:
                     </p>
@@ -95,12 +102,12 @@ export default function FooterSection() {
             </div>
 
             {/* ── Logo center ── */}
-            <div className="footer-anim" style={{ display: "flex", justifyContent: "center", padding: "56px 0 48px" }}>
+            <div className="footer-anim" style={{ display: "flex", justifyContent: "center", padding: "56px 0 48px", position: "relative", zIndex: 10, pointerEvents: "none" }}>
                 <LogoMark size={140} />
             </div>
 
             {/* ── Bottom bar ── */}
-            <div style={{ borderTop: "1px solid rgba(45,61,26,0.12)", padding: "20px 6vw", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <div style={{ borderTop: "1px solid rgba(45,61,26,0.12)", padding: "20px 6vw", display: "flex", justifyContent: "space-between", alignItems: "center", position: "relative", zIndex: 10 }}>
                 <p style={{ ...TEXT, fontSize: "0.65rem", opacity: 0.45, margin: 0 }}>© 2025 Shivanya RxAI Inc.</p>
                 <p style={{ ...TEXT, fontSize: "0.65rem", opacity: 0.45, margin: 0 }}>TERMS OF USE</p>
             </div>

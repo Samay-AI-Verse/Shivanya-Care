@@ -6,23 +6,13 @@ export function useWhatsAppSectionGsap(showContent) {
     useGSAP(() => {
         if (!showContent) return;
 
-        // Make the previous BlackSection stick visually in place
-        // so that WhatsAppSection slides over it seamlessly.
-        gsap.to("#black-medical-section", {
-            yPercent: 100, // Move it down matching the scroll speed
-            ease: "none",
-            scrollTrigger: {
-                trigger: "#whatsapp-section",
-                start: "top bottom", // Triggers as soon as WhatsAppSection begins to appear
-                end: "top top",      // Ends when WhatsAppSection fully covers the screen
-                scrub: true,
-            }
-        });
+        // Removed the complex yPercent: 100 animation on #black-medical-section 
+        // as it causes severe layout jitter and shake when combined with pinning.
 
         // Set initial states
         gsap.set(".wa-content-box", { xPercent: 100 });
 
-        // Start the video as a full screen box (no curve, full size)
+        // Start the video as a full screen box
         gsap.set(".wa-video-box", {
             width: "100%",
             height: "100%",
@@ -39,12 +29,12 @@ export function useWhatsAppSectionGsap(showContent) {
                 trigger: "#whatsapp-section",
                 start: "top 75%", // Starts animating when it's partially into view
                 end: "top 10%",   // Finishes when it's almost at the top
-                scrub: 1.5,       // Links the animation smoothly to the scroll perfectly
-                once: true        // VERY IMPORTANT: Plays exactly once. Kills the trigger after it hits the end, so it never reverses.
+                scrub: 1,         // Reduced scrub latency to feel more responsive and smooth
+                // Removed once: true to prevent jarring stops/jumps during scrub
             }
         });
 
-        // Animate the video box to the left, taking up 50% width
+        // Animate the width so the nested video with object-cover stays properly centered
         tl.to(".wa-video-box", {
             width: "50%",
             ease: "none"

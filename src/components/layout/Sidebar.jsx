@@ -12,13 +12,14 @@ export default function Sidebar({ isOpen, onClose }) {
     const panelRef = useRef(null);
     const itemsRef = useRef([]);
     const footerRef = useRef(null);
-
     const navLinks = [
         { label: "Home", href: "#" },
-        { label: "Features", href: "#" },
-        { label: "How It Works", href: "#" },
-        { label: "Channels", href: "#" },
-        { label: "Contact", href: "#" },
+        { label: "Features", href: "#features-section" },
+        { label: "Ordering", href: "#whatsapp-section" },
+        { label: "Voice & SMS", href: "#sms-voice-section" },
+        { label: "Dashboard", href: "#mask-scroll-section" },
+        { label: "Delivery", href: "#delivery-section" },
+        { label: "Contact", href: "#footer-section" },
     ];
 
     /* ── GSAP open / close ── */
@@ -99,17 +100,17 @@ export default function Sidebar({ isOpen, onClose }) {
                                     display: "block",
                                     color: "#f4ede6",
                                     fontFamily: "'Outfit', sans-serif",
-                                    fontWeight: 300,
-                                    fontSize: "clamp(2rem, 3.8vw, 3.2rem)",
-                                    lineHeight: 1.15, letterSpacing: "-0.01em",
+                                    fontWeight: 400,
+                                    fontSize: "clamp(1.2rem, 2.2vw, 1.6rem)",
+                                    lineHeight: 1.2, letterSpacing: "0.02em",
                                     textDecoration: "none",
-                                    paddingTop: "10px", paddingBottom: "10px", paddingLeft: "0px",
+                                    paddingTop: "14px", paddingBottom: "14px",
                                     borderBottom: "1px solid rgba(244,237,230,0.08)",
                                     opacity: 0,
-                                    transition: "color 0.22s, padding-left 0.22s",
+                                    transition: "color 0.22s",
                                 }}
-                                onMouseEnter={e => { e.currentTarget.style.color = "#b7c25e"; e.currentTarget.style.paddingLeft = "12px"; }}
-                                onMouseLeave={e => { e.currentTarget.style.color = "#f4ede6"; e.currentTarget.style.paddingLeft = "0px"; }}
+                                onMouseEnter={e => { e.currentTarget.style.color = "#b7c25e"; }}
+                                onMouseLeave={e => { e.currentTarget.style.color = "#f4ede6"; }}
                             >
                                 {link.label}
                             </a>

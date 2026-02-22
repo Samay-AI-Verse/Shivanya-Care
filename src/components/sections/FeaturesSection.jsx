@@ -13,6 +13,7 @@ import bgImage from "../../assets/image/bg_green.png";
 export default function FeaturesSection() {
     return (
         <div
+            id="features-section"
             className="features-inner absolute inset-0 z-[60] flex items-center justify-center overflow-hidden"
             style={{
                 opacity: 0,

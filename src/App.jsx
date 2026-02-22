@@ -10,12 +10,15 @@ import { useBlackSectionGsap } from "./hooks/useBlackSectionGsap";
 import { useWhatsAppSectionGsap } from "./hooks/useWhatsAppSectionGsap";
 import { useSmsVoiceSectionGsap } from "./hooks/useSmsVoiceSectionGsap";
 import { useMaskScrollSectionGsap } from "./hooks/useMaskScrollSectionGsap";
+import { useFooterCurtainGsap } from "./hooks/useFooterCurtainGsap";
 
 /* ── Layout ── */
 import LoadingOverlay from "./components/effects/LoadingOverlay";
 import CubeGrid from "./components/effects/CubeGrid";
+import CubeGridFooter from "./components/effects/CubeGridFooter";
 import Sidebar from "./components/layout/Sidebar";
 import Navbar from "./components/layout/Navbar";
+import LoginModal from "./components/login/LoginModal";
 
 /* ── Sections ── */
 import LandingHero from "./components/sections/LandingHero";
@@ -41,6 +44,7 @@ gsap.registerPlugin(ScrollTrigger);
 export default function App() {
   const [showContent, setShowContent] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [loginOpen, setLoginOpen] = useState(false);
 
   /* Scroll-driven animations — start once overlay is gone */
   useLenis(showContent);
@@ -50,6 +54,7 @@ export default function App() {
   useWhatsAppSectionGsap(showContent);
   useSmsVoiceSectionGsap(showContent);
   useMaskScrollSectionGsap(showContent);
+  useFooterCurtainGsap(showContent);
 
   return (
     <>
@@ -61,7 +66,7 @@ export default function App() {
       <LoadingOverlay onComplete={() => setShowContent(true)} />
 
       {/* Global Navbar - Sticky across all pages */}
-      <Navbar onMenuClick={() => setMenuOpen(true)} />
+      <Navbar onMenuClick={() => setMenuOpen(true)} onGetStartedClick={() => setLoginOpen(true)} />
 
       {/* Main scrollable page */}
       <div className="w-full overflow-y-scroll scroll-smooth relative">
@@ -86,12 +91,32 @@ export default function App() {
 
         <SmsVoiceSection />    {/* Page 5 — SMS & Voice Call channels */}
         <MaskScrollSection />  {/* Page 5.5 — Mask Reveal for Dashboard */}
-        <DeliverySection />    {/* Page 6 — Delivery & multi-user module  */}
-        <FooterSection />      {/* Page 7 — Footer / contact (cream bg)   */}
+
+        {/* 
+          ╔══════════════════════════════════════════════════════════╗
+          ║  FOOTER ANIMATION BLOCK — pinned for the CubeGrid wipe   ║
+          ╚══════════════════════════════════════════════════════════╝
+        */}
+        <div className="footer-wipe-container relative w-full bg-[#0a1103]">
+
+          <DeliverySection />    {/* Page 6 — Delivery scrolls naturally  */}
+
+          {/* Placed absolutely at the bottom so it aligns with the screen when container pins at 'bottom bottom' */}
+          <div className="footer-inner absolute bottom-0 left-0 w-full h-screen z-[60]" style={{ opacity: 0, pointerEvents: "none" }}>
+            <FooterSection />      {/* Page 7 — Footer / contact (cream bg)   */}
+          </div>
+
+          <div className="footer-grid-wrapper absolute bottom-0 left-0 w-full h-screen z-[70] pointer-events-none">
+            <CubeGridFooter />
+          </div>
+        </div>
       </div>
 
       {/* Slide-in navigation sidebar */}
       <Sidebar isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
+
+      {/* Login form modal — opens on GET STARTED */}
+      <LoginModal isOpen={loginOpen} onClose={() => setLoginOpen(false)} />
     </>
   );
 }

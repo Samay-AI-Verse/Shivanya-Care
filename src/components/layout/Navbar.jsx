@@ -2,8 +2,9 @@
  * Navbar — top bar on the landing hero
  * Props:
  *  onMenuClick — opens the Sidebar
+ *  onGetStartedClick — opens the Login form modal
  */
-export default function Navbar({ onMenuClick }) {
+export default function Navbar({ onMenuClick, onGetStartedClick }) {
     return (
         <div
             className="navbar fixed top-0 left-0 w-full py-7 px-10 flex justify-between items-center"
@@ -50,7 +51,14 @@ export default function Navbar({ onMenuClick }) {
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '22px' }}>
                 <a href="#contact" className="nav-link">CONTACT US</a>
-                <a href="#get-started" className="nav-link">GET STARTED</a>
+                <button
+                type="button"
+                className="nav-link"
+                onClick={() => onGetStartedClick?.()}
+                style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+            >
+                GET STARTED
+            </button>
             </div>
         </div>
     );
