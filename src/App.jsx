@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -10,6 +9,7 @@ import { useSectionAnimations } from "./hooks/useSectionAnimations";
 import { useBlackSectionGsap } from "./hooks/useBlackSectionGsap";
 import { useWhatsAppSectionGsap } from "./hooks/useWhatsAppSectionGsap";
 import { useSmsVoiceSectionGsap } from "./hooks/useSmsVoiceSectionGsap";
+import { useMaskScrollSectionGsap } from "./hooks/useMaskScrollSectionGsap";
 
 /* ── Layout ── */
 import LoadingOverlay from "./components/effects/LoadingOverlay";
@@ -23,7 +23,7 @@ import FeaturesSection from "./components/sections/FeaturesSection";
 import BlackSection from "./components/sections/BlackSection";
 import WhatsAppSection from "./components/sections/WhatsAppSection";
 import SmsVoiceSection from "./components/sections/SmsVoiceSection";
-import DashboardSection from "./components/sections/DashboardSection";
+import MaskScrollSection from "./components/sections/MaskScrollSection";
 import DeliverySection from "./components/sections/DeliverySection";
 import FooterSection from "./components/sections/FooterSection";
 
@@ -49,6 +49,7 @@ export default function App() {
   useBlackSectionGsap(showContent);
   useWhatsAppSectionGsap(showContent);
   useSmsVoiceSectionGsap(showContent);
+  useMaskScrollSectionGsap(showContent);
 
   return (
     <>
@@ -83,10 +84,8 @@ export default function App() {
         <BlackSection />
         <WhatsAppSection />    {/* Page 3 — WhatsApp & Telegram ordering  */}
 
-        {/* Page 4 — Medical Fill Effect section (3rd major logical section) */}
-
-        <SmsVoiceSection />    {/* Page 5 — SMS & Voice Call channels     */}
-        <DashboardSection />   {/* Page 6 — Pharmacist dashboard          */}
+        <SmsVoiceSection />    {/* Page 5 — SMS & Voice Call channels */}
+        <MaskScrollSection />  {/* Page 5.5 — Mask Reveal for Dashboard */}
         <DeliverySection />    {/* Page 6 — Delivery & multi-user module  */}
         <FooterSection />      {/* Page 7 — Footer / contact (cream bg)   */}
       </div>

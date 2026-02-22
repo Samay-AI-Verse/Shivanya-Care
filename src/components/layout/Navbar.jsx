@@ -7,11 +7,11 @@ export default function Navbar({ onMenuClick }) {
     return (
         <div
             className="navbar fixed top-0 left-0 w-full py-7 px-10 flex justify-between items-center"
-            style={{ zIndex: 100 }}
+            style={{ zIndex: 100, mixBlendMode: 'difference' }}
         >
             <style>{`
                 :root {
-                    --nav-color: #f4ede6;
+                    --nav-color: #ffffff;
                 }
                 .nav-link {
                     position: relative;

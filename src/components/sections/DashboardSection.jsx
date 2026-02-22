@@ -18,6 +18,7 @@ const ORDERS = [
     { id: "#RX4820", patient: "Priya M.", item: "Lisinopril 10mg", status: "Out for Delivery", statusColor: "#b7c25e" },
     { id: "#RX4819", patient: "Arun S.", item: "Atorvastatin 20mg", status: "Processing", statusColor: "#f4c542" },
     { id: "#RX4818", patient: "Seema T.", item: "Paracetamol 500mg", status: "Delivered", statusColor: "#7dcf50" },
+    { id: "#RX4817", patient: "Rohit V.", item: "Azithromycin 500mg", status: "Processing", statusColor: "#f4c542" },
 ];
 
 const SIDEBAR_ITEMS = [
@@ -29,154 +30,180 @@ const SIDEBAR_ITEMS = [
     { icon: "ri-settings-3-line", label: "Settings", active: false },
 ];
 
+const QUICK_STATS = [
+    { icon: "ri-whatsapp-line", label: "WhatsApp Orders", value: "142", color: "#25D366" },
+    { icon: "ri-message-2-line", label: "SMS Orders", value: "89", color: "#b7c25e" },
+    { icon: "ri-phone-line", label: "Voice Orders", value: "53", color: "#7dcf50" },
+];
+
 export default function DashboardSection() {
     return (
-        <section style={{
-            minHeight: "100vh",
-            background: "linear-gradient(180deg, #2d3d1a 0%, #1a2a0a 100%)",
-            padding: "100px 6vw 80px",
+        <section id="dashboard-section" style={{
+            /* Allowed it to take natural height instead of restricting to 100vh */
+            background: `linear-gradient(180deg, rgba(45,61,26,0.6) 0%, rgba(18,30,7,0.97) 100%), url('/background-image.png') center/cover`,
+            backgroundAttachment: "fixed",
+            /* Added padding bottom (10vh) so you can scroll past the full box */
+            padding: "15vh 6vw 10vh",
+            display: "flex",
+            flexDirection: "column",
+            /* INCREASED GAP HERE (was 32px, now 64px) to push the dashboard further down from the text */
+            gap: "64px",
         }}>
-            {/* Heading */}
-            <p className="dash-anim" style={{ color: "#b7c25e", fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.24em", textTransform: "uppercase", fontFamily: "'Outfit', sans-serif", margin: "0 0 14px" }}>
-                For Pharmacies &amp; Medical Stores
-            </p>
-            <h2 className="dash-anim" style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 900, fontSize: "clamp(2rem, 5vw, 4rem)", color: "#f4ede6", margin: "0 0 16px", lineHeight: 1 }}>
-                Your patients order via chat —<br />
-                <span style={{ fontFamily: "Georgia, serif", fontStyle: "italic", fontWeight: 400, color: "#c8dfa0" }}>you manage it all here.</span>
-            </h2>
 
-            {/* Sub-copy */}
-            <p className="dash-anim" style={{ color: "#f4ede6", opacity: 0.65, fontSize: "0.95rem", lineHeight: 1.75, fontFamily: "'Outfit', sans-serif", maxWidth: "600px", margin: "0 0 30px" }}>
-                Shivanya RxAI is a <strong style={{ color: "#b7c25e", fontWeight: 600 }}>B2B platform built for pharmacies.</strong> Patients
-                never see this panel — they simply WhatsApp, call, or text your pharmacy as usual.
-                Every incoming order lands here automatically, ready for you to accept, pack, and dispatch.
-            </p>
+            {/* ── Header ── */}
+            <div className="dash-anim">
+                <p style={{ color: "#b7c25e", fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.26em", textTransform: "uppercase", fontFamily: "'Outfit', sans-serif", margin: "0 0 10px" }}>
+                    Pharmacy Command Centre
+                </p>
+                <h2 style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 900, fontSize: "clamp(1.8rem, 4vw, 3.4rem)", color: "#f4ede6", margin: "0 0 10px", lineHeight: 1.05 }}>
+                    Your patients order via chat —
+                    <br />
+                    <span style={{ fontFamily: "Georgia, serif", fontStyle: "italic", fontWeight: 400, color: "#c8dfa0" }}>you manage it all here.</span>
+                </h2>
+            </div>
 
-            {/* Order-flow banner */}
-            <div className="dash-anim" style={{
-                display: "flex", alignItems: "center", gap: "0",
-                marginBottom: "32px", background: "rgba(183,194,94,0.06)",
-                border: "1px solid rgba(183,194,94,0.18)", borderRadius: "16px",
-                overflow: "hidden",
-            }}>
-                {[
-                    { icon: "ri-user-smile-line", label: "Patient", sub: "Messages or calls your pharmacy", color: "#25D366", bg: "rgba(37,211,102,0.10)" },
-                    { icon: "ri-robot-2-line", label: "AI Agent", sub: "Understands, verifies & confirms", color: "#b7c25e", bg: "rgba(183,194,94,0.08)" },
-                    { icon: "ri-dashboard-line", label: "Your Dashboard", sub: "Order appears — you accept & dispatch", color: "#7dcf50", bg: "rgba(125,207,80,0.10)" },
-                ].map((step, i, arr) => (
-                    <div key={step.label} style={{ display: "contents" }}>
-                        <div style={{ flex: 1, padding: "18px 20px", background: step.bg, display: "flex", alignItems: "center", gap: "14px" }}>
-                            <div style={{ width: "40px", height: "40px", borderRadius: "12px", background: `${step.color}18`, border: `1px solid ${step.color}30`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                                <i className={step.icon} style={{ color: step.color, fontSize: "1.15rem" }} />
-                            </div>
-                            <div>
-                                <div style={{ color: step.color, fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", fontFamily: "'Outfit', sans-serif" }}>{step.label}</div>
-                                <div style={{ color: "#f4ede6", opacity: 0.65, fontSize: "0.75rem", fontFamily: "'Outfit', sans-serif", marginTop: "2px" }}>{step.sub}</div>
-                            </div>
+            {/* ── Channel Quick Stats ── */}
+            <div className="dash-anim" style={{ display: "flex", gap: "14px", flexWrap: "wrap", marginTop: "-20px" }}>
+                {QUICK_STATS.map(s => (
+                    <div key={s.label} style={{
+                        display: "flex", alignItems: "center", gap: "10px",
+                        background: `${s.color}0D`,
+                        border: `1px solid ${s.color}25`,
+                        borderRadius: "12px", padding: "10px 18px",
+                    }}>
+                        <i className={s.icon} style={{ color: s.color, fontSize: "1.1rem" }} />
+                        <div>
+                            <div style={{ color: s.color, fontWeight: 800, fontSize: "1.05rem", fontFamily: "'Outfit', sans-serif", lineHeight: 1 }}>{s.value}</div>
+                            <div style={{ color: "#f4ede6", opacity: 0.5, fontSize: "0.6rem", fontFamily: "'Outfit', sans-serif", marginTop: "2px", letterSpacing: "0.05em" }}>{s.label}</div>
                         </div>
-                        {i < arr.length - 1 && (
-                            <div style={{ padding: "0 4px", color: "rgba(183,194,94,0.4)", fontSize: "1.1rem" }}>›</div>
-                        )}
                     </div>
                 ))}
             </div>
 
-            {/* Dashboard shell */}
+            {/* ── Dashboard Shell ── */}
             <div className="dash-anim" style={{
-                background: "rgba(15,24,8,0.85)",
-                border: "1px solid rgba(183,194,94,0.18)",
-                borderRadius: "24px",
+                background: "rgba(12,20,5,0.95)",
+                /* Restored the full border around the entire box */
+                border: "1px solid rgba(183,194,94,0.15)",
+                /* Restored full rounded corners (was 20px 20px 0 0) */
+                borderRadius: "20px",
                 overflow: "hidden",
-                boxShadow: "0 40px 100px rgba(0,0,0,0.6)",
-                backdropFilter: "blur(12px)",
+                boxShadow: "0 -20px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(183,194,94,0.06)",
+                backdropFilter: "blur(14px)",
                 display: "grid",
-                gridTemplateColumns: "220px 1fr",
-                minHeight: "520px",
+                gridTemplateColumns: "200px 1fr",
+                /* Removed minHeight so the box naturally wraps its content nicely */
             }}>
 
                 {/* ── Sidebar ── */}
-                <div style={{ borderRight: "1px solid rgba(183,194,94,0.10)", padding: "24px 0" }}>
-                    <div style={{ padding: "0 20px 20px", borderBottom: "1px solid rgba(244,237,230,0.07)", marginBottom: "12px" }}>
-                        <div style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 900, fontSize: "0.85rem", color: "#f4ede6" }}>Shivanya RxAI</div>
-                        <div style={{ color: "#b7c25e", fontSize: "0.62rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", fontFamily: "'Outfit', sans-serif" }}>Pharmacy Portal</div>
+                <div style={{ borderRight: "1px solid rgba(183,194,94,0.08)", padding: "20px 0", background: "rgba(0,0,0,0.3)" }}>
+                    <div style={{ padding: "0 18px 18px", borderBottom: "1px solid rgba(244,237,230,0.06)", marginBottom: "10px" }}>
+                        <div style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 900, fontSize: "0.82rem", color: "#f4ede6" }}>Shivanya RxAI</div>
+                        <div style={{ color: "#b7c25e", fontSize: "0.58rem", fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", fontFamily: "'Outfit', sans-serif", marginTop: "2px" }}>Pharmacy Portal</div>
                     </div>
                     {SIDEBAR_ITEMS.map(item => (
                         <div key={item.label} style={{
-                            display: "flex", alignItems: "center", gap: "12px",
-                            padding: "10px 20px", margin: "2px 8px",
+                            display: "flex", alignItems: "center", gap: "10px",
+                            padding: "9px 18px", margin: "2px 7px",
                             borderRadius: "10px",
-                            background: item.active ? "rgba(183,194,94,0.14)" : "transparent",
+                            background: item.active ? "rgba(183,194,94,0.13)" : "transparent",
                             cursor: "pointer",
-                            transition: "background 0.2s",
                         }}>
-                            <i className={item.icon} style={{ color: item.active ? "#b7c25e" : "rgba(244,237,230,0.45)", fontSize: "1rem" }} />
-                            <span style={{ color: item.active ? "#f4ede6" : "rgba(244,237,230,0.5)", fontSize: "0.8rem", fontWeight: item.active ? 700 : 500, fontFamily: "'Outfit', sans-serif" }}>{item.label}</span>
+                            <i className={item.icon} style={{ color: item.active ? "#b7c25e" : "rgba(244,237,230,0.35)", fontSize: "0.95rem" }} />
+                            <span style={{ color: item.active ? "#f4ede6" : "rgba(244,237,230,0.4)", fontSize: "0.76rem", fontWeight: item.active ? 700 : 400, fontFamily: "'Outfit', sans-serif" }}>{item.label}</span>
                         </div>
                     ))}
+
+                    {/* AI Status */}
+                    <div style={{ margin: "14px 7px 0", padding: "10px 14px", background: "rgba(37,211,102,0.07)", border: "1px solid rgba(37,211,102,0.15)", borderRadius: "10px" }}>
+                        <div style={{ display: "flex", alignItems: "center", gap: "6px", marginBottom: "4px" }}>
+                            <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#25D366", display: "inline-block", boxShadow: "0 0 6px #25D366" }} />
+                            <span style={{ color: "#25D366", fontSize: "0.62rem", fontWeight: 700, fontFamily: "'Outfit', sans-serif", letterSpacing: "0.06em" }}>AI ACTIVE</span>
+                        </div>
+                        <div style={{ color: "#f4ede6", opacity: 0.45, fontSize: "0.58rem", fontFamily: "'Outfit', sans-serif" }}>Handling incoming orders</div>
+                    </div>
                 </div>
 
-                {/* ── Main area ── */}
-                <div style={{ padding: "24px 28px", display: "flex", flexDirection: "column", gap: "22px" }}>
+                {/* ── Main Content ── */}
+                <div style={{ padding: "22px 26px", display: "flex", flexDirection: "column", gap: "20px" }}>
 
                     {/* Topbar */}
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                         <div>
-                            <div style={{ color: "#f4ede6", fontWeight: 700, fontSize: "1rem", fontFamily: "'Outfit', sans-serif" }}>Good Morning, Dr. Mehta 👋</div>
-                            <div style={{ color: "#f4ede6", opacity: 0.45, fontSize: "0.72rem", fontFamily: "'Outfit', sans-serif" }}>Saturday, 21 Feb 2026</div>
+                            <div style={{ color: "#f4ede6", fontWeight: 700, fontSize: "0.95rem", fontFamily: "'Outfit', sans-serif" }}>Good Morning, Dr. Mehta 👋</div>
+                            <div style={{ color: "#f4ede6", opacity: 0.4, fontSize: "0.68rem", fontFamily: "'Outfit', sans-serif", marginTop: "1px" }}>Saturday, 22 Feb 2026</div>
                         </div>
-                        <div style={{ display: "flex", gap: "10px" }}>
-                            <button style={{ background: "rgba(183,194,94,0.12)", border: "1px solid rgba(183,194,94,0.28)", borderRadius: "10px", padding: "7px 14px", color: "#b7c25e", fontSize: "0.72rem", fontWeight: 700, fontFamily: "'Outfit', sans-serif", cursor: "pointer", letterSpacing: "0.06em" }}>+ Add Medicine</button>
-                            <button style={{ background: "rgba(125,207,80,0.12)", border: "1px solid rgba(125,207,80,0.28)", borderRadius: "10px", padding: "7px 14px", color: "#7dcf50", fontSize: "0.72rem", fontWeight: 700, fontFamily: "'Outfit', sans-serif", cursor: "pointer", letterSpacing: "0.06em" }}>View Orders</button>
+                        <div style={{ display: "flex", gap: "8px" }}>
+                            <button style={{ background: "rgba(183,194,94,0.1)", border: "1px solid rgba(183,194,94,0.25)", borderRadius: "9px", padding: "6px 13px", color: "#b7c25e", fontSize: "0.68rem", fontWeight: 700, fontFamily: "'Outfit', sans-serif", cursor: "pointer", letterSpacing: "0.05em" }}>+ Add Medicine</button>
+                            <button style={{ background: "rgba(125,207,80,0.1)", border: "1px solid rgba(125,207,80,0.25)", borderRadius: "9px", padding: "6px 13px", color: "#7dcf50", fontSize: "0.68rem", fontWeight: 700, fontFamily: "'Outfit', sans-serif", cursor: "pointer", letterSpacing: "0.05em" }}>View All Orders</button>
                         </div>
                     </div>
 
                     {/* KPI row */}
-                    <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "14px" }}>
+                    <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "12px" }}>
                         {KPIS.map(k => (
-                            <div key={k.label} style={{ background: "rgba(244,237,230,0.04)", border: "1px solid rgba(244,237,230,0.08)", borderRadius: "14px", padding: "16px 18px" }}>
-                                <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "10px" }}>
-                                    <i className={k.icon} style={{ color: k.color, fontSize: "1.2rem" }} />
-                                    <span style={{ background: `${k.color}20`, color: k.color, fontSize: "0.6rem", fontWeight: 700, padding: "2px 7px", borderRadius: "99px", fontFamily: "'Outfit', sans-serif" }}>{k.delta}</span>
+                            <div key={k.label} style={{ background: "rgba(244,237,230,0.03)", border: "1px solid rgba(244,237,230,0.07)", borderRadius: "14px", padding: "14px 16px" }}>
+                                <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "9px" }}>
+                                    <i className={k.icon} style={{ color: k.color, fontSize: "1.1rem" }} />
+                                    <span style={{ background: `${k.color}1A`, color: k.color, fontSize: "0.58rem", fontWeight: 700, padding: "2px 7px", borderRadius: "99px", fontFamily: "'Outfit', sans-serif" }}>{k.delta}</span>
                                 </div>
-                                <div style={{ color: "#f4ede6", fontWeight: 900, fontSize: "1.4rem", fontFamily: "'Outfit', sans-serif", lineHeight: 1 }}>{k.value}</div>
-                                <div style={{ color: "#f4ede6", opacity: 0.45, fontSize: "0.65rem", fontFamily: "'Outfit', sans-serif", marginTop: "4px", letterSpacing: "0.06em", textTransform: "uppercase" }}>{k.label}</div>
+                                <div style={{ color: "#f4ede6", fontWeight: 900, fontSize: "1.35rem", fontFamily: "'Outfit', sans-serif", lineHeight: 1 }}>{k.value}</div>
+                                <div style={{ color: "#f4ede6", opacity: 0.38, fontSize: "0.6rem", fontFamily: "'Outfit', sans-serif", marginTop: "4px", letterSpacing: "0.07em", textTransform: "uppercase" }}>{k.label}</div>
                             </div>
                         ))}
                     </div>
 
-                    {/* Chart + Orders row */}
-                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: "16px" }}>
-                        {/* Bar chart */}
-                        <div style={{ background: "rgba(244,237,230,0.04)", border: "1px solid rgba(244,237,230,0.08)", borderRadius: "14px", padding: "18px" }}>
-                            <div style={{ color: "#f4ede6", fontWeight: 700, fontSize: "0.8rem", fontFamily: "'Outfit', sans-serif", marginBottom: "16px", opacity: 0.85 }}>Inbound Orders (via AI channels)</div>
-                            <div style={{ display: "flex", alignItems: "flex-end", gap: "8px", height: "90px" }}>
+                    {/* Chart + Orders */}
+                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr", gap: "14px", flex: 1 }}>
+                        {/* Bar Chart */}
+                        <div style={{ background: "rgba(244,237,230,0.03)", border: "1px solid rgba(244,237,230,0.07)", borderRadius: "14px", padding: "16px" }}>
+                            <div style={{ color: "#f4ede6", fontWeight: 700, fontSize: "0.75rem", fontFamily: "'Outfit', sans-serif", marginBottom: "4px", opacity: 0.85 }}>Inbound Orders (AI Channels)</div>
+                            <div style={{ color: "#b7c25e", fontSize: "0.58rem", fontFamily: "'Outfit', sans-serif", marginBottom: "14px", opacity: 0.7 }}>WhatsApp · SMS · Voice</div>
+                            <div style={{ display: "flex", alignItems: "flex-end", gap: "6px", height: "100px" }}>
                                 {CHART_BARS.map((h, i) => (
                                     <div key={i} style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: "4px", height: "100%" }}>
                                         <div style={{ flex: 1, display: "flex", alignItems: "flex-end", width: "100%" }}>
-                                            <div style={{ width: "100%", height: `${h}%`, background: i === 6 ? "#b7c25e" : "rgba(183,194,94,0.4)", borderRadius: "5px 5px 0 0", transition: "height 0.4s" }} />
+                                            <div style={{ width: "100%", height: `${h}%`, background: i === 6 ? "#b7c25e" : "rgba(183,194,94,0.35)", borderRadius: "4px 4px 0 0", transition: "height 0.4s" }} />
                                         </div>
-                                        <span style={{ color: "#f4ede6", opacity: 0.35, fontSize: "0.55rem", fontFamily: "'Outfit', sans-serif" }}>{CHART_DAYS[i]}</span>
+                                        <span style={{ color: "#f4ede6", opacity: 0.3, fontSize: "0.5rem", fontFamily: "'Outfit', sans-serif" }}>{CHART_DAYS[i]}</span>
                                     </div>
                                 ))}
                             </div>
                         </div>
 
-                        {/* Orders table */}
-                        <div style={{ background: "rgba(244,237,230,0.04)", border: "1px solid rgba(244,237,230,0.08)", borderRadius: "14px", padding: "18px", overflow: "auto" }}>
-                            <div style={{ color: "#f4ede6", fontWeight: 700, fontSize: "0.8rem", fontFamily: "'Outfit', sans-serif", marginBottom: "14px", opacity: 0.85 }}>Orders from WhatsApp / SMS / Call</div>
+                        {/* Orders Table */}
+                        <div style={{ background: "rgba(244,237,230,0.03)", border: "1px solid rgba(244,237,230,0.07)", borderRadius: "14px", padding: "16px", overflow: "auto" }}>
+                            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "12px" }}>
+                                <div style={{ color: "#f4ede6", fontWeight: 700, fontSize: "0.75rem", fontFamily: "'Outfit', sans-serif", opacity: 0.85 }}>Recent Orders</div>
+                                <span style={{ color: "#b7c25e", fontSize: "0.6rem", fontWeight: 600, fontFamily: "'Outfit', sans-serif", opacity: 0.7 }}>via WhatsApp / SMS / Call</span>
+                            </div>
                             {ORDERS.map(o => (
-                                <div key={o.id} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "8px 0", borderBottom: "1px solid rgba(244,237,230,0.05)" }}>
-                                    <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
-                                        <span style={{ color: "#b7c25e", fontSize: "0.65rem", fontWeight: 700, fontFamily: "'Outfit', sans-serif" }}>{o.id}</span>
+                                <div key={o.id} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "7px 0", borderBottom: "1px solid rgba(244,237,230,0.04)" }}>
+                                    <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+                                        <span style={{ color: "#b7c25e", fontSize: "0.6rem", fontWeight: 700, fontFamily: "'Outfit', sans-serif", minWidth: "54px" }}>{o.id}</span>
                                         <div>
-                                            <div style={{ color: "#f4ede6", fontSize: "0.72rem", fontWeight: 600, fontFamily: "'Outfit', sans-serif" }}>{o.patient}</div>
-                                            <div style={{ color: "#f4ede6", opacity: 0.45, fontSize: "0.62rem", fontFamily: "'Outfit', sans-serif" }}>{o.item}</div>
+                                            <div style={{ color: "#f4ede6", fontSize: "0.68rem", fontWeight: 600, fontFamily: "'Outfit', sans-serif" }}>{o.patient}</div>
+                                            <div style={{ color: "#f4ede6", opacity: 0.4, fontSize: "0.58rem", fontFamily: "'Outfit', sans-serif" }}>{o.item}</div>
                                         </div>
                                     </div>
-                                    <span style={{ background: `${o.statusColor}18`, color: o.statusColor, fontSize: "0.6rem", fontWeight: 700, padding: "3px 9px", borderRadius: "99px", fontFamily: "'Outfit', sans-serif", border: `1px solid ${o.statusColor}30` }}>{o.status}</span>
+                                    <span style={{ background: `${o.statusColor}15`, color: o.statusColor, fontSize: "0.56rem", fontWeight: 700, padding: "3px 9px", borderRadius: "99px", fontFamily: "'Outfit', sans-serif", border: `1px solid ${o.statusColor}28`, whiteSpace: "nowrap" }}>{o.status}</span>
                                 </div>
                             ))}
                         </div>
+                    </div>
+
+                    {/* Inventory Alert Banner */}
+                    <div style={{
+                        display: "flex", alignItems: "center", gap: "12px",
+                        background: "rgba(255,107,107,0.07)", border: "1px solid rgba(255,107,107,0.18)",
+                        borderRadius: "12px", padding: "10px 16px",
+                    }}>
+                        <i className="ri-error-warning-line" style={{ color: "#ff6b6b", fontSize: "1rem", flexShrink: 0 }} />
+                        <div style={{ flex: 1 }}>
+                            <span style={{ color: "#ff6b6b", fontWeight: 700, fontSize: "0.7rem", fontFamily: "'Outfit', sans-serif" }}>Low Stock Alert — </span>
+                            <span style={{ color: "#f4ede6", opacity: 0.6, fontSize: "0.68rem", fontFamily: "'Outfit', sans-serif" }}>7 medicines below reorder level. Metformin 500mg &amp; 3 others need restocking.</span>
+                        </div>
+                        <button style={{ background: "rgba(255,107,107,0.12)", border: "1px solid rgba(255,107,107,0.25)", borderRadius: "8px", padding: "5px 12px", color: "#ff6b6b", fontSize: "0.62rem", fontWeight: 700, fontFamily: "'Outfit', sans-serif", cursor: "pointer", whiteSpace: "nowrap" }}>View Inventory</button>
                     </div>
                 </div>
             </div>

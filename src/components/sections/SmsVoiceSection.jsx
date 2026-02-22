@@ -1,5 +1,5 @@
 import React from "react";
-import rightImage from "../../assets/image/pharmacy_voice.png";
+import rightImage from "../../assets/image/rightside.png";
 
 export default function VoiceSection() {
     return (
@@ -9,7 +9,7 @@ export default function VoiceSection() {
             <div className="sv-image-box absolute top-0 right-0 w-full h-full overflow-hidden bg-[#f4ede6]">
                 <img
                     src={rightImage}
-                    alt="Pharmacy Voice"
+                    alt="Pharmacy Voice AI Interface"
                     className="absolute inset-0 w-full h-full object-cover"
                     style={{ filter: "brightness(0.95)" }}
                 />
@@ -41,30 +41,15 @@ export default function VoiceSection() {
                         lineHeight: 1.65, fontFamily: "'Outfit', sans-serif", margin: "0 0 16px",
                         fontWeight: 500
                     }}>
-                        Many patients prefer a simple phone call over chatting.
+                        Just like speaking to a real pharmacist, our Voice AI handles patient calls effortlessly.
                     </p>
                     <p style={{
                         color: "#4d6628", opacity: 0.85, fontSize: "0.95rem",
                         lineHeight: 1.65, fontFamily: "'Outfit', sans-serif", margin: "0 0 32px",
                         fontWeight: 500
                     }}>
-                        With Shivanya Rx AI, you can provide 24/7 support. Our AI agent answers calls instantly, understands spoken requirements, verifies prescriptions, and secures orders automatically — so your pharmacists can focus on care instead of phones.
+                        Patients call your pharmacy, and the AI answers instantly. It listens to their requirements, talks them through the process, verifies their prescriptions, and securely places the order in your system — all over a natural glowing phone conversation. Complete 24/7 care, zero wait times.
                     </p>
-
-                    <button style={{
-                        background: "#607a30", color: "#f4ede6",
-                        border: "none", borderRadius: "30px",
-                        padding: "14px 28px", fontSize: "0.8rem",
-                        fontWeight: 600, fontFamily: "'Outfit', sans-serif",
-                        letterSpacing: "0.08em", cursor: "pointer",
-                        textTransform: "uppercase", display: "flex", alignItems: "center", gap: "8px",
-                        transition: "background 0.3s"
-                    }}
-                        onMouseOver={(e) => e.target.style.background = "#4d6628"}
-                        onMouseOut={(e) => e.target.style.background = "#607a30"}
-                    >
-                        <span style={{ pointerEvents: 'none' }}>•</span> LEARN MORE <span style={{ pointerEvents: 'none' }}>•</span>
-                    </button>
                 </div>
 
             </div>

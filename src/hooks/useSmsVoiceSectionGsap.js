@@ -62,5 +62,15 @@ export function useSmsVoiceSectionGsap(showContent) {
             ease: "none"
         }, 0);
 
+        // Pin the SMS/Voice section for 1 screen height after it fully arrives, 
+        // giving the user time to read before the MaskScrollSection comes up.
+        ScrollTrigger.create({
+            trigger: "#sms-voice-section",
+            start: "top top",
+            end: "+=50%", // Pin for 1 full screen height (adjust for more/less reading time)
+            pin: true,
+            pinSpacing: true, // creates space so the next section waits
+        })
+
     }, [showContent]);
 }
