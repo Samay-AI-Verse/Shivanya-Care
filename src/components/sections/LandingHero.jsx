@@ -51,15 +51,15 @@ export default function LandingHero({ onMenuClick }) {
 
                     {/* Giant brand title */}
                     <div className="hero-text" style={{
-                        position: 'absolute', top: '12%', left: '2%',
+                        position: 'absolute', top: '15%', left: '5%',
                         zIndex: 10,
-                        transform: 'scale(1.4) rotate(-10deg)',
+                        transform: 'rotate(-8deg)',
                         transformOrigin: 'left top',
                         opacity: 0.97,
                     }}>
                         <h1 style={{
                             fontFamily: "'Outfit', sans-serif", fontWeight: 900,
-                            fontSize: 'clamp(4rem, 10vw, 11rem)',
+                            fontSize: 'clamp(3rem, 15vw, 11rem)',
                             color: '#f4ede6', margin: 0, lineHeight: 0.9, letterSpacing: '-0.03em',
                         }}>
                             Shivanya
@@ -70,32 +70,25 @@ export default function LandingHero({ onMenuClick }) {
                     </div>
 
                     {/* Horizontal divider row */}
-                    <div style={{
-                        position: 'absolute', top: '35%', left: '3%', right: '4%',
-                        zIndex: 10,
-                        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                    }}>
+                    <div className="absolute top-[38%] md:top-[35%] left-[5%] right-[5%] z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 md:gap-0">
                         <p style={{
-                            color: '#f4ede6', fontSize: '0.7rem', fontWeight: 600,
+                            color: '#f4ede6', fontSize: 'clamp(0.55rem, 1.2vw, 0.7rem)', fontWeight: 600,
                             letterSpacing: '0.18em', textTransform: 'uppercase',
                             margin: 0, fontFamily: "'Outfit', sans-serif", opacity: 0.82, flexShrink: 0,
                         }}>PHARMA, REINVENTED.</p>
 
-                        <div style={{ flex: 1, height: '1px', backgroundColor: 'rgba(244,237,230,0.25)', margin: '0 18px', minWidth: '20px' }} />
+                        <div className="hidden md:block flex-1 h-[1px]" style={{ backgroundColor: 'rgba(244,237,230,0.25)', margin: '0 18px', minWidth: '20px' }} />
 
-                        <p style={{
-                            color: '#f4ede6', fontSize: '0.7rem', fontWeight: 500,
+                        <p className="text-left md:text-right" style={{
+                            color: '#f4ede6', fontSize: 'clamp(0.55rem, 1.2vw, 0.7rem)', fontWeight: 500,
                             letterSpacing: '0.04em', lineHeight: 1.5,
                             fontFamily: "'Outfit', sans-serif", opacity: 0.75,
-                            margin: 0, textAlign: 'right', maxWidth: '240px', flexShrink: 0,
-                        }}>AI-POWERED PHARMACY —<br />REIMAGINED FOR THE FUTURE.</p>
+                            margin: 0, maxWidth: '280px', flexShrink: 0,
+                        }}>AI-POWERED PHARMACY —<br className="hidden md:inline" /> REIMAGINED FOR THE FUTURE.</p>
                     </div>
 
                     {/* Scroll hint */}
-                    <div style={{
-                        position: 'absolute', bottom: '5%', left: '3%',
-                        zIndex: 10, display: 'flex', alignItems: 'center', gap: '8px',
-                    }}>
+                    <div className="absolute bottom-[2%] md:bottom-[5%] left-[5%] z-10 flex items-center gap-[8px]">
                         <i className="ri-arrow-down-line" style={{ fontSize: '1.1rem', color: '#f4ede6', opacity: 0.55 }} />
                         <span style={{
                             color: '#f4ede6', fontSize: '0.6rem', opacity: 0.5,

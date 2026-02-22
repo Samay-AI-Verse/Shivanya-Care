@@ -17,7 +17,7 @@ export default function Sidebar({ isOpen, onClose }) {
         { label: "Features", href: "#features-section" },
         { label: "Ordering", href: "#whatsapp-section" },
         { label: "Voice & SMS", href: "#sms-voice-section" },
-        { label: "Dashboard", href: "#mask-scroll-section" },
+        { label: "Dashboard", href: "#dashboard-section" },
         { label: "Delivery", href: "#delivery-section" },
         { label: "Contact", href: "#footer-section" },
     ];

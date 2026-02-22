@@ -40,14 +40,11 @@ export function useFooterCurtainGsap(showContent) {
             scaleY: 1,
             duration: 1.4,
             stagger: (i) => {
-                const row = Math.floor(i / COLS);
-                const col = i % COLS;
-                const reversedRow = (ROWS - 1) - row;
-                const reversedCol = (COLS - 1) - col;
-                return reversedRow * 0.45 + reversedCol * 0.13;
+                const reversedCol = (COLS - 1) - i;
+                return reversedCol * 0.15;
             },
-            // Matches the dark background of the delivery section initially
-            backgroundColor: "#0a1103",
+            // Light cream color first
+            backgroundColor: "#ede9df",
             ease: "power3.inOut",
         })
 
@@ -68,9 +65,9 @@ export function useFooterCurtainGsap(showContent) {
             }, "open1")
 
             // Phase 3b — CURTAIN OPENS: left col first, bottom rows first
-            // It was dark green, we could change it to cream to wipe into cream.
+            // It was cream, change it to dark to reveal the cream footer behind
             .to(".footer-grid-cube", {
-                backgroundColor: "#ede9df", // transitions to cream
+                backgroundColor: "#0a1103", // transitions to dark
                 duration: 0.3,
                 ease: "none"
             }, "open1")
@@ -80,10 +77,7 @@ export function useFooterCurtainGsap(showContent) {
                 transformOrigin: "bottom center", // open upwards
                 duration: 1.4,
                 stagger: (i) => {
-                    const row = Math.floor(i / COLS);
-                    const col = i % COLS;
-                    const reversedRow = (ROWS - 1) - row;
-                    return reversedRow * 0.45 + col * 0.13;
+                    return i * 0.15;
                 },
                 ease: "power3.inOut",
             }, "open1+=0.2");

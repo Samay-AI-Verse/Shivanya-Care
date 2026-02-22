@@ -12,18 +12,19 @@ export default function CubeGridFooter() {
             style={{
                 display: "grid",
                 gridTemplateColumns: `repeat(${COLS}, 1fr)`,
-                gridTemplateRows: `repeat(${ROWS}, 1fr)`,
+                gridTemplateRows: "1fr",
             }}
         >
-            {[...Array(TOTAL_CUBES)].map((_, i) => (
+            {[...Array(COLS)].map((_, i) => (
                 <div
                     key={i}
                     className="footer-grid-cube"
                     style={{
                         transform: "translateZ(0)",
                         willChange: "transform, opacity",
-                        /* border matches the dark green theme so the curtain looks sleek */
-                        border: "1px solid rgba(45, 61, 26, 0.30)",
+                        /* Vertical shutter style without horizontal rows */
+                        borderLeft: "1px solid rgba(45, 61, 26, 0.30)",
+                        borderRight: "1px solid rgba(45, 61, 26, 0.30)",
                         boxSizing: "border-box",
                     }}
                 />

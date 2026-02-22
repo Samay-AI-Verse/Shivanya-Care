@@ -7,7 +7,7 @@
 export default function Navbar({ onMenuClick, onGetStartedClick }) {
     return (
         <div
-            className="navbar fixed top-0 left-0 w-full py-7 px-10 flex justify-between items-center"
+            className="navbar fixed top-0 left-0 w-full py-4 px-6 md:py-7 md:px-10 flex justify-between items-center"
             style={{ zIndex: 100, mixBlendMode: 'difference' }}
         >
             <style>{`
@@ -46,19 +46,19 @@ export default function Navbar({ onMenuClick, onGetStartedClick }) {
                     display: 'flex', alignItems: 'center', gap: '6px', padding: 0,
                 }}
             >
-                <span style={{ fontSize: '0.85rem' }}>☰</span> MENU
+                <span style={{ fontSize: '0.85rem' }}></span> MENU
             </button>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '22px' }}>
-                <a href="#contact" className="nav-link">CONTACT US</a>
+            <div className="hidden md:flex items-center gap-[22px]">
+                <a href="#footer-section" className="nav-link">CONTACT US</a>
                 <button
-                type="button"
-                className="nav-link"
-                onClick={() => onGetStartedClick?.()}
-                style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
-            >
-                GET STARTED
-            </button>
+                    type="button"
+                    className="nav-link"
+                    onClick={() => onGetStartedClick?.()}
+                    style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+                >
+                    GET STARTED
+                </button>
             </div>
         </div>
     );
